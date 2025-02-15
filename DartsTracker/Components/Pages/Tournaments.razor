@@ -4,7 +4,13 @@
 @inject TournamentService TournamentService
 
 <h3>Tournaments</h3>
-
+@if (tournaments is null)
+{
+    <p>Loading...</p>
+}
+else if (!tournaments.Any()){
+    <p>No tournaments.</p>
+}
 <table class="table">
     <thead>
         <tr>

@@ -10,10 +10,10 @@ namespace DartsTracker.Models
 
         [Required]
         [MaxLength(255)] 
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         [Required]
-        public DateTime Date { get; set; }
+        public DateTime Date { get; set; } = DateTime.Today;
 
         public List<Match> Matches { get; set; } = new List<Match>();
     }

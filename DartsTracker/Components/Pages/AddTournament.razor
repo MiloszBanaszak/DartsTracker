@@ -1,0 +1,33 @@
+﻿@page "/add-tournament"
+@using DartsTracker.Services
+@using DartsTracker.Models
+@inject TournamentService TournamentService
+@inject NavigationManager Navigation
+
+<h3>Add tournament</h3>
+
+<EditForm Model="newTournament" OnValidSubmit="AddTournamentAsync" FormName="AddTournamentForm">
+    <DataAnnotationsValidator />
+    <div>
+        <label>Name:</label>
+        <InputText @bind-Value="newTournament.Name" />
+        <ValidationMessage For="@(() => newTournament.Name)" />
+    </div>
+    <div>
+        <label>Date:</label>
+        <InputDate @bind-Value="newTournament.Date" />
+        <ValidationMessage For="@(() => newTournament.Date)" />
+    </div>
+    <button type="submit">Add</button>
+</EditForm>
+
+@code {
+    private Tournament newTournament = new Tournament();
+
+    private async Task AddTournamentAsync()
+    {
+        await TournamentService.AddTournamentAsync(newTournament);
+        newTournament = new Tournament();
+        Navigation.NavigateTo("/tournaments");
+    }
+}
