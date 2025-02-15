@@ -1,6 +1,7 @@
 using DartsTracker.Components;
 using DartsTracker.Data;
-using Microsoft.EntityFrameworkCore
+using DartsTracker.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace DartsTracker
 {
@@ -9,9 +10,13 @@ namespace DartsTracker
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
             var connectionString = "Data Source =darts.db"; 
             builder.Services.AddDbContext<DartsContext>(options =>
-            options.UseSqlServer(connectionString));
+                options.UseSqlite(connectionString));
+
+            builder.Services.AddScoped<TournamentService>();
+
             // Add services to the container.
             builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents();

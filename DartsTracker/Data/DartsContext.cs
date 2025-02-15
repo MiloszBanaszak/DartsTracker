@@ -7,7 +7,12 @@ namespace DartsTracker.Data
     {
         public DartsContext(DbContextOptions<DartsContext> options) : base(options) { }
 
-        public DbSet<Tournament> Tournament { get; set; }
-        public DbSet<Match> Match { get; set; }
+        public DbSet<Tournament> Tournaments { get; set; }
+        public DbSet<Match> Matches { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

@@ -1,0 +1,35 @@
+﻿@page "/tournaments"
+@using DartsTracker.Services
+@using DartsTracker.Models
+@inject TournamentService TournamentService
+
+<h3>Tournaments</h3>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Matches</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var tournament in tournaments)
+        {
+            <tr>
+                <td>@tournament.Name</td>
+                <td>@tournament.Date.ToShortDateString()</td>
+                <td>@tournament.Matches.Count</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    private List<Tournament> tournaments = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        tournaments = await TournamentService.GetTournamentsAsync();
+    }
+}
